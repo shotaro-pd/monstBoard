@@ -30,7 +30,7 @@ class LinebotController < ActionController::Base
         url = (URI.extract(txt, ["https"])).first
         @board = Board.new(title: title,name: '?',main: '?',url: url)
         if @board.save
-            response = txt + 'を募集します。'
+            response = title + 'を募集します。'
         else
             response = '招待のメッセージ以外張るんじゃねーよgm'
         end
