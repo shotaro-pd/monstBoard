@@ -1,5 +1,6 @@
 class LinebotController < ActionController::Base
     require 'line/bot'  # gem 'line-bot-api'
+    require 'uri'
   
     # callbackアクションのCSRFトークン認証を無効
     protect_from_forgery :except => [:callback]
@@ -14,7 +15,6 @@ class LinebotController < ActionController::Base
     def callback
   
     #   # Postモデルの中身をランダムで@postに格納する
-    #   @post=Post.offset( rand(Post.count) ).first
       body = request.body.read
   
       signature = request.env['HTTP_X_LINE_SIGNATURE']
@@ -25,7 +25,13 @@ class LinebotController < ActionController::Base
       events = client.parse_events_from(body)
   
       events.each { |event|
-        response = event.message['text']
+        txt = event.message['text']
+        title = txt[/「(.*?)」/, 0]
+        url = (URI.extract(txt, ["https"])).first
+
+        @board = Board.new(title: title,name: '?',main: '?',url: url).save
+
+        response = txt + 'を募集します。'
 
         case event
             when Line::Bot::Event::Message
