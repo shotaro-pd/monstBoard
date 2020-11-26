@@ -1,5 +1,5 @@
 class Api::V1::BoardController < ApplicationController
     def index
-        render json: "Hello Taro23"
+        render json: Board.all
     end
 end
