@@ -29,9 +29,12 @@ class LinebotController < ActionController::Base
         title = txt[/「(.*?)」/, 0]
         url = (URI.extract(txt, ["https"])).first
 
-        @board = Board.new(title: title,name: '?',main: '?',url: url).save
-
-        response = txt + 'を募集します。'
+        if @board = Board.new(title: title,name: '?',main: '?',url: url)
+            @board.save
+            response = txt + 'を募集します。'
+        else
+            response = '招待のメッセージ以外張るんじゃねーよgm'
+        end
 
         case event
             when Line::Bot::Event::Message
