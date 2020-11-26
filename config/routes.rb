@@ -5,4 +5,7 @@ Rails.application.routes.draw do
       resources :board, only:[:index]
     end
   end
+
+  post '/callback' => 'linebot#callback'
+
 end
