@@ -26,7 +26,7 @@ class LinebotController < ActionController::Base
   
       events.each { |event|
         txt = event.message['text']
-        title = txt[/「(.*?)」/, 0]
+        title = txt[/「(.*?)」/, 1]
         url = (URI.extract(txt, ["https"])).first
         @board = Board.new(title: title,name: '?',main: '?',url: url)
         if @board.save
