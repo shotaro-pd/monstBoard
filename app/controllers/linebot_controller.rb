@@ -15,7 +15,7 @@ class LinebotController < ApplicationController
   
     #   # Postモデルの中身をランダムで@postに格納する
     #   @post=Post.offset( rand(Post.count) ).first
-    #   body = request.body.read
+      body = request.body.read
   
       signature = request.env['HTTP_X_LINE_SIGNATURE']
       unless client.validate_signature(body, signature)
