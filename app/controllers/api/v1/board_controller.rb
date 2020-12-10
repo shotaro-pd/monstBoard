@@ -4,6 +4,7 @@ class Api::V1::BoardController < ApplicationController
     end
     
     def rank
-        render json: Board.group(:title).count.where(created: Time.zone.now.yesterday..Time.zone.now)
+        render json: Board.group(:title).count
+        #.where(created: Time.zone.now.yesterday..Time.zone.now)
     end
 end
