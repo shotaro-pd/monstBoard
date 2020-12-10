@@ -1,10 +1,10 @@
 Rails.application.routes.draw do
   namespace :api do
     namespace :v1 do
-      resources :board, only:[:index]
-      namespace :board do
-          resources :ranking, only[:rank]
-      end
+        post '/board' => 'board#index'
+        post '/ranking' => 'board#rank'
+        # resources :board, only:[:index]
+        # resources :ranking, only[:rank]
     end
   end
 
