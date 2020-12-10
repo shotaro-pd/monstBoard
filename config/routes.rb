@@ -1,8 +1,10 @@
 Rails.application.routes.draw do
   namespace :api do
     namespace :v1 do
-      # api test action
       resources :board, only:[:index]
+      namespace :board do
+          resources :ranking, only[:rank]
+      end
     end
   end
 
